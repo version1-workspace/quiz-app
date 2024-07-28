@@ -1,0 +1,15 @@
+.link {
+  text-decoration: none;
+}
+
+.container {
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  height: 280px;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--font-color);
+}

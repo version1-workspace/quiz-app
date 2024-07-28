@@ -1,0 +1,13 @@
+.main {
+}
+
+.cardList {
+  margin: 64px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cardItem {
+  padding: 8px;
+}
+
