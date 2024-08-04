@@ -12,10 +12,10 @@ export type QuestionParams = {
 
 class QuestionModel extends BaseModel<QuestionParams> {}
 
-export type Question = QuestionModel | QuestionParams
+export type Question = QuestionModel & QuestionParams;
 
-export const factory = (params: QuestionParams) =>
-  new Proxy(
-    new QuestionModel(params),
+export const factory = (params: QuestionParams): Question =>
+  new Proxy<Question>(
+    new QuestionModel(params) as Question,
     proxyHandler<QuestionModel, QuestionParams>(),
   );

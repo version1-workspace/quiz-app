@@ -7,11 +7,17 @@ import {
 } from "./question";
 import { Tag, TagParams, factory as tagFactory } from "./tag";
 
-type QuizParams = {
+export type QuizStatus = "active" | "archived" | "draft";
+
+export type QuizParams = {
   id: string;
   title: string;
+  themeColor: string;
   description: string;
   duration: number;
+  tryCount: number;
+  progressionRate: number;
+  status: QuizStatus;
   questions: QuestionParams[];
   tags: TagParams[];
   createdAt: AppDate;
@@ -28,9 +34,20 @@ class QuizModel extends BaseModel<QuizParams> {
     this.questions = params.questions.map((it) => questionFactory(it));
     this.tags = params.tags.map((it) => tagFactory(it));
   }
+
+  get isProgress() {
+    return this.raw.progressionRate > 0;
+  }
+
+  get displayDuration() {
+    return Math.max(Math.floor(this.raw.duration / 60), 1);
+  }
 }
 
-export type Quiz = QuizModel | QuizParams;
+export type Quiz = QuizModel & QuizParams;
 
 export const factory = (params: QuizParams) =>
-  new Proxy(new QuizModel(params), proxyHandler<QuizModel, QuizParams>());
+  new Proxy<Quiz>(
+    new QuizModel(params) as Quiz,
+    proxyHandler<QuizModel, QuizParams>(),
+  );

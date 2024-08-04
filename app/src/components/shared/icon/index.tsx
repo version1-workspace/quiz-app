@@ -1,7 +1,9 @@
-import { IoMenuOutline } from "react-icons/io5";
+import { IoHeart, IoMenuOutline, IoEllipsisVertical } from "react-icons/io5";
 
 const icons = {
   menu: IoMenuOutline,
+  kebabMenu: IoEllipsisVertical,
+  like: IoHeart,
 };
 
 type IconNames = keyof typeof icons;
