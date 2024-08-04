@@ -1,10 +1,12 @@
 .main {
+  background: var(--background-color);
 }
 
 .cardList {
   margin: 64px auto;
   display: flex;
   flex-wrap: wrap;
+  width: var(--max-width);
 }
 
 .cardItem {

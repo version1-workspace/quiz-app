@@ -5,6 +5,7 @@
   color: var(--font-color);
   padding: 16px;
   border-bottom: 1px solid var(--border-color);
+  background: var(--background-color-light);
 }
 
 .logo {
