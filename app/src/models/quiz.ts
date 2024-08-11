@@ -11,6 +11,8 @@ export type QuizStatus = "active" | "archived" | "draft";
 
 export type QuizParams = {
   id: string;
+  slug: string;
+  version: string;
   title: string;
   themeColor: string;
   description: string;

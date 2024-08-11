@@ -10,4 +10,8 @@ export default class AppDate {
   toString() {
     return this._raw.toString()
   }
+
+  format(format: string) {
+    return this._raw.format(format)
+  }
 }

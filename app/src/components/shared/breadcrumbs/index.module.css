@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 64px;
+  padding: 0;
+}
+
+.item {
+  margin-right: 8px;
+  list-style: none;
+}
+
+.arrow {
+  display: inline-block;
+  margin-right: 8px;
+  list-style: none;
+}
+
+.current {
+  font-weight: 500;
+}
+
+.link {
+  color: var(--info-color);
+  text-decoration: none;
+}

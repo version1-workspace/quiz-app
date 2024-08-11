@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Card from "@/components/quiz/card";
 import { Quiz } from "@/models/quiz";
-import { fetchQuiz } from "@/services/api/quiz";
+import { fetchQuizzes } from "@/services/api/quiz";
 
 export default function Home() {
   const [data, setData] = useState<Quiz[]>([]);
   useEffect(() => {
     const init = async () => {
-      const res = await fetchQuiz();
+      const res = await fetchQuizzes();
       setData(res);
     };
 
