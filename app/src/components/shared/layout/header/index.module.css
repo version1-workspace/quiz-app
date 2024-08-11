@@ -10,6 +10,14 @@
 
 .logo {
   flex: 2;
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  width: 32px;
+  height: auto;
+  margin-right: 16px;
 }
 
 .search {
@@ -22,7 +30,36 @@
   font-size: 16px;
 }
 
+.menuList {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.menuItem {
+  list-style: none;
+  margin-right: 16px;
+}
+
 .icon {
+  font-size: 24px;
   display: block;
-  margin-left: auto;
+  color: var(--icon-color);
+  cursor: pointer;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--icon-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarIcon {
+  font-size: 18px;
+  color: var(--background-color-light);
 }

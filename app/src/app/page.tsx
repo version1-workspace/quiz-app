@@ -16,8 +16,6 @@ export default function Home() {
     init();
   }, []);
 
-  debugger
-
   return (
     <main className={styles.main}>
       <div className={styles.cardList}>
