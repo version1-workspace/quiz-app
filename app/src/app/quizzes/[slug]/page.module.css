@@ -42,7 +42,6 @@
   background: var(--background-color-light);
   margin: 0 auto;
   margin-top: 8px;
-  margin-bottom: 64px;
   padding: 32px;
 }
 
@@ -58,4 +57,15 @@
 
 .start {
   padding: 64px;
+}
+
+.results {
+  background: var(--background-color-light);
+  width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+.resultsContent {
+  max-width: 800px;
+  margin: 0 auto;
 }

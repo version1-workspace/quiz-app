@@ -1,0 +1,109 @@
+.container {
+  margin: 0;
+  padding: 16px;
+}
+
+.resultItem {
+  padding: 4px;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.divider  {
+  border-bottom: 1px solid #f0f0f0;
+  width: 220px;
+  margin: auto;
+  margin-bottom: 64px;
+}
+
+.date {
+  font-size: 12px;
+  white-space: nowrap;
+  margin-right: 32px;
+}
+
+.version {
+  font-size: 12px;
+  white-space: nowrap;
+  margin-right: 32px;
+}
+
+.dot {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.body {
+  padding-left: 32px;
+  position: relative;
+  top: -12px;
+  width: 100%;
+}
+
+.footer {
+  margin: 32px 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.details {
+  margin: 0;
+}
+
+.detailList {
+  margin: 0;
+  padding: 0;
+  width: 140px;
+}
+
+.detail {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.value {
+  white-space: nowrap;
+}
+
+.noteTitle {
+  font-size: 10px;
+  margin: 4px 0;
+}
+
+.note {
+  font-size: 12px;
+  width: 400px;
+}
+
+.more {
+  width: 200px;
+  padding: 16px 0;
+}
+
+.moreButton {
+  padding: 4px;
+  font-size: 12px;
+  width: 120px;
+}
+
+.check {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin-left: 8px;
+}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Quiz } from "@/models/quiz";
 import { Tag } from "@/models/tag";
 import Icon from "@/components/shared/icon";
+import { truncate } from "@/lib/string";
 
 type Props = {
   data: Quiz;
@@ -11,7 +12,7 @@ type Props = {
 const defaultThemeColor = "linear-gradient(158deg, #F4EA9F 0%, #F4EA9F60 100%)";
 
 export default function Card({ data }: Props) {
-  const to = `/quiz/${data.id}`;
+  const to = `/quizzes/${data.id}`;
 
   return (
     <Link className={styles.link} href={to}>
@@ -53,7 +54,7 @@ export default function Card({ data }: Props) {
           </div>
         </div>
         <div className={styles.body}>
-          <p className={styles.description}>{data.description}</p>
+          <p className={styles.description}>{data.displayDescription}</p>
         </div>
         <div className={styles.footer}>
           <div className={styles.actions}>

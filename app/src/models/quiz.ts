@@ -6,8 +6,12 @@ import {
   factory as questionFactory,
 } from "./question";
 import { Tag, TagParams, factory as tagFactory } from "./tag";
+import { truncate } from "@/lib/string";
 
 export type QuizStatus = "active" | "archived" | "draft";
+
+const defaultTruncateLength = 60;
+const truncator = truncate(defaultTruncateLength);
 
 export type QuizParams = {
   id: string;
@@ -44,6 +48,11 @@ class QuizModel extends BaseModel<QuizParams> {
   get displayDuration() {
     return Math.max(Math.floor(this.raw.duration / 60), 1);
   }
+
+  get displayDescription() {
+    return truncator(this.raw.description);
+  }
+
 }
 
 export type Quiz = QuizModel & QuizParams;

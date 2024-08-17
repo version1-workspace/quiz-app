@@ -3,8 +3,7 @@
   border-radius: 8px;
   padding: 16px 32px;
   width: 100%;
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .primary {
   background: var(--primary-color);
@@ -28,6 +27,19 @@
 
 .danger {
   background: var(--danger-color);
+  color: var(--font-color-light);
+}
+
+.outline {
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid  var(--primary-color);
+  border-radius: 32px;
+  transition: all 0.3s ease;
+}
+
+.outline:hover {
+  background: var(--primary-color);
   color: var(--font-color-light);
 }
 

@@ -4,14 +4,22 @@ import {
   IoEllipsisVertical,
   IoPerson,
   IoNotificationsSharp,
+  IoCheckmarkCircle,
+  IoAlarmOutline,
+  IoCalendarNumberOutline,
+  IoLayers
 } from "react-icons/io5";
 
 const icons = {
+  calendar: IoCalendarNumberOutline,
+  clock: IoAlarmOutline,
   menu: IoMenuOutline,
   kebabMenu: IoEllipsisVertical,
+  layer: IoLayers,
   like: IoHeart,
   person: IoPerson,
   notification: IoNotificationsSharp,
+  check: IoCheckmarkCircle,
 };
 
 type IconNames = keyof typeof icons;

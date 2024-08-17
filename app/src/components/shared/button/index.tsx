@@ -7,17 +7,19 @@ type Variant =
   | "info"
   | "warning"
   | "danger"
-  | "success";
+  | "success"
+  | "outline"
 
 type Props = {
   variant?: Variant;
+  className?: string;
   children: React.ReactNode;
 };
 
-export default function Button({ variant, children }: Props) {
+export default function Button({ variant, className, children }: Props) {
   const variantStyle = styles[variant || "default"];
 
   return (
-    <button className={join(styles.container, variantStyle)}>{children}</button>
+    <button className={join(styles.container, variantStyle, className)}>{children}</button>
   );
 }

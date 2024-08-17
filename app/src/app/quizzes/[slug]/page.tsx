@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { Quiz } from "@/models/quiz";
 import { fetchQuiz } from "@/services/api/quiz";
@@ -18,7 +19,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     };
 
     init();
-  });
+  }, []);
 
   if (!data) {
     return <div>Loading...</div>;
@@ -68,7 +69,9 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
       </div>
       <div className={styles.results}>
-        <Results data={data} />
+        <div className={styles.resultsContent}>
+          <Results data={data} />
+        </div>
       </div>
       <div className={styles.related}></div>
     </div>
