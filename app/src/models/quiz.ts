@@ -1,12 +1,9 @@
 import AppDate from "./date";
 import { BaseModel, proxyHandler } from "./";
-import {
-  Question,
-  QuestionParams,
-  factory as questionFactory,
-} from "./question";
+import { Block, BlockParams, factory as blocksFactory } from "./blocks";
 import { Tag, TagParams, factory as tagFactory } from "./tag";
 import { truncate } from "@/lib/string";
+import { Question } from "./blocks/question";
 
 export type QuizStatus = "active" | "archived" | "draft";
 
@@ -24,21 +21,31 @@ export type QuizParams = {
   tryCount: number;
   progressionRate: number;
   status: QuizStatus;
-  questions: QuestionParams[];
+  blocks: BlockParams[];
   tags: TagParams[];
   createdAt: AppDate;
   updatedAt: AppDate;
 };
 
 class QuizModel extends BaseModel<QuizParams> {
-  questions: Question[] = [];
+  blocks: Block[] = [];
   tags: Tag[] = [];
 
   constructor(params: QuizParams) {
     super(params);
 
-    this.questions = params.questions.map((it) => questionFactory(it));
+    this.blocks = params.blocks?.map((it) => blocksFactory(it)) ?? [];
     this.tags = params.tags.map((it) => tagFactory(it));
+  }
+
+  get total() {
+    return this.questions.length;
+  }
+
+  get questions() {
+    return this.blocks.filter((it) => {
+      return it.kind === "question"
+    });
   }
 
   get isProgress() {
@@ -52,7 +59,6 @@ class QuizModel extends BaseModel<QuizParams> {
   get displayDescription() {
     return truncator(this.raw.description);
   }
-
 }
 
 export type Quiz = QuizModel & QuizParams;

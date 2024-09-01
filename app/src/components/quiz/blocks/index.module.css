@@ -1,0 +1,40 @@
+.blockContainer {
+  width: 960px;
+  margin: 0 auto;
+  margin-bottom: 32px;
+  background: var(--background-color-light);
+}
+
+.header {
+  padding: 16px 32px;
+  border-bottom: 4px solid var(--background-color-dark);
+}
+
+.title {
+}
+
+.body {
+  padding: 16px 32px;
+}
+
+.options {
+  margin: 0;
+  padding: 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.optionText {
+  width: 100%;
+  margin: 0;
+  margin-left: 32px;
+}
+
+.error {
+  color: var(--danger-color);
+}

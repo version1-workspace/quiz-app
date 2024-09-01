@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Quiz } from "@/models/quiz";
 import { fetchQuiz } from "@/services/api/quiz";
 import styles from "./page.module.css";
@@ -64,7 +65,9 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div className={styles.body}>{data.description}</div>
         <div className={styles.footer}>
           <div className={styles.start}>
-            <Button variant="primary">新しく回答を始める</Button>
+            <Link href={`/quizzes/${data.id}/responses`}>
+              <Button variant="primary">新しく回答を始める</Button>
+            </Link>
           </div>
         </div>
       </div>

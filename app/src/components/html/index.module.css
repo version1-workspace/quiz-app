@@ -1,0 +1,21 @@
+.content {
+
+}
+
+.content ul {
+  padding-left: 32px;
+  margin: 0;
+}
+
+.content li {
+  margin-bottom: 16px;
+}
+
+.content code {
+  display: block;
+  background: var(--background-color-dark);
+  padding: 16px;
+  border-radius: 4px;
+  width: 100%;
+}
+

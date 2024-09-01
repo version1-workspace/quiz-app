@@ -3,6 +3,10 @@ import dayjs from "dayjs";
 export default class AppDate {
   private readonly _raw: dayjs.Dayjs;
 
+  static now() {
+    return new AppDate(new Date());
+  }
+
   constructor(params: Date) {
     this._raw = dayjs(params);
   }

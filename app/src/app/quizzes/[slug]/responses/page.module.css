@@ -1,0 +1,88 @@
+.container {
+  background: var(--background-color-dark);
+  min-height: 100vh;
+  overflow: scroll;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: auto;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  padding: 16px 0;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.count {
+  padding: 16px 0;
+}
+
+.infoList {
+  margin: 0;
+  padding: 16px;
+  font-size: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  list-style: none;
+}
+
+.label {
+  margin-right: 16px;
+}
+
+.content {
+  margin-bottom: 64px;
+}
+
+.heading {
+  width: 960px;
+  background: var(--background-color-light);
+  margin: 0 auto;
+  margin-top: 8px;
+  margin-bottom: 32px;
+  padding: 32px;
+}
+
+.message {
+  text-align: center;
+  padding: 16px;
+}
+
+.divider {
+  height: 1px;
+  width: 960px;
+  margin: 0 auto;
+  background: var(--background-color-light);
+  margin-bottom: 8px;
+}
+
+.footer {
+  width: 960px;
+  background: var(--background-color-light);
+  margin: 0 auto;
+  margin-bottom: 32px;
+  padding: 32px;
+}
+
+.submit {
+  width: 480px;
+  margin: auto;
+}
+
+.skelton {
+  width: 960px;
+  margin: 0 auto;
+  margin-top: 64px;
+}
