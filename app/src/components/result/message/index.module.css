@@ -1,0 +1,66 @@
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+  background: var(--background-color-light);
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.titleContainer {
+  padding: 16px;
+  padding-bottom: 8px;
+}
+
+.duration {
+  padding: 16px;
+}
+.icon {
+  padding: 32px;
+  font-size: 112px;
+}
+
+.content {
+  padding: 16px;
+  width: 100%;
+}
+
+.subHeading {
+  text-align: left;
+  padding: 0;
+  margin: 0;
+
+}
+
+.correctCount {
+  color: var(--correct-color);
+  font-size: 32px;
+}
+
+.totalCount {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+.detail {
+  padding: 8px 16px;
+  margin: 0;
+}
+
+.message {
+  margin: 0;
+  padding: 16px;
+  padding-top: 8px;
+}
+
+.title {
+    margin: 0;
+}
+

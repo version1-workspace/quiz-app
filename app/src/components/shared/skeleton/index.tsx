@@ -2,7 +2,7 @@ import styles from "./index.module.css";
 
 type Props = {
   loading: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   style?: React.CSSProperties;
   height?: number;
   rows: number;

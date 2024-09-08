@@ -3,6 +3,7 @@ import { QuizParams, factory } from "@/models/quiz";
 import { factory as tagFactory } from "@/models/tag";
 import AppDate from "@/models/date";
 
+
 const tags = {
   htmlCSS: tagFactory({
     id: uuid(),
@@ -98,7 +99,7 @@ const quizzes = [
         updatedAt: new AppDate(new Date()),
       },
       {
-        id: uuid(),
+        id: "6c14209c-ef56-4300-ae16-f293d855f6cf",
         index: 1,
         qIndex: 1,
         kind: "question",
@@ -113,7 +114,7 @@ const quizzes = [
         updatedAt: new AppDate(new Date()),
       },
       {
-        id: uuid(),
+        id: "1509d797-c52d-44cf-a426-553a18da427f",
         index: 2,
         qIndex: 2,
         kind: "question",
@@ -128,7 +129,7 @@ const quizzes = [
         updatedAt: new AppDate(new Date()),
       },
       {
-        id: uuid(),
+        id: "4471c8ee-54be-4cd2-a63d-e01cc5e68405",
         index: 3,
         qIndex: 3,
         kind: "question",

@@ -2,6 +2,13 @@ import AppDate from "./date";
 import { BaseModel, proxyHandler } from "./";
 import { Quiz, QuizParams, factory as quizFactory } from "./quiz";
 
+type AnswerParams = {
+  questionId: string;
+  response: number;
+  answer: number;
+  correct: boolean;
+};
+
 export type ResultParams = {
   id: string;
   quizId: string;
@@ -10,6 +17,7 @@ export type ResultParams = {
   total: number;
   note: string;
   duration?: number;
+  answers: AnswerParams[];
   reviewingAt: AppDate;
   startedAt: AppDate;
   finishedAt?: AppDate;
@@ -31,7 +39,14 @@ class ResultModel extends BaseModel<ResultParams> {
       return;
     }
 
-    return Math.max(Math.floor(this.raw.duration / 60), 1);
+    const min = Math.floor(this.raw.duration / 60);
+    const sec = this.raw.duration % 60;
+
+    const p = function (num: number, length: number) {
+      return (Array(length).join("0") + num).slice(-length);
+    };
+
+    return `${p(min, 2)}:${p(sec, 2)}`;
   }
 
   get displayDate() {
@@ -70,6 +85,10 @@ class ResultModel extends BaseModel<ResultParams> {
     }
 
     return Math.floor((this.raw.pass / this.raw.total) * 100);
+  }
+
+  getAnswer(questionId: string) {
+    return this.raw.answers.find((it) => it.questionId === questionId);
   }
 }
 

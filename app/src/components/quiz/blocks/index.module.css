@@ -38,3 +38,16 @@
 .error {
   color: var(--danger-color);
 }
+
+.correct {
+  color:  var(--correct-color);
+}
+
+.incorrect {
+  color: var(--danger-color);
+}
+
+.resultLabel {
+  display: inline-block;
+  margin-left: 16px;
+}

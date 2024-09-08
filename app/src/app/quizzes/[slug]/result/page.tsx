@@ -3,83 +3,39 @@
 import { createContext, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Quiz } from "@/models/quiz";
+import { Result } from "@/models/result";
 import { fetchQuiz } from "@/services/api/quiz";
+import { fetchResult } from "@/services/api/result";
 import styles from "./page.module.css";
 import Button from "@/components/shared/button";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
 import Results from "@/components/quiz/results";
 import Blocks from "@/components/quiz/blocks";
+import { Pass } from "@/components/result/message";
 import Skeleton from "@/components/shared/skeleton";
 import AppDate from "@/models/date";
 import { useForm } from "@/lib/form";
 import Timer from "@/lib/timer";
 
-type FormValue = {
-  time: number;
-  startedAt: AppDate;
-  responses: Record<string, number | undefined>;
-};
-
-type FormErrors = Record<string, string>;
-
 export default function Page({ params }: { params: { slug: string } }) {
   const router = useRouter();
-  const timerRef = useRef<Timer>(new Timer());
   const [data, setData] = useState<Quiz>();
+  const [result, setResult] = useState<Result>();
   const [loading, setLoading] = useState(true);
   const { slug } = params;
 
-  const form = useForm<FormValue, FormErrors>({
-    initialValues: {
-      time: 0,
-      startedAt: AppDate.now(),
-      responses: {},
-    },
-    validate: (values: FormValue) => {
-      const errors: FormErrors = {};
-
-      if (data) {
-        data.questions.forEach((question) => {
-          if (values.responses[question.id] == null) {
-            errors[question.id] = "回答を選択してください";
-          }
-        });
-      }
-
-      return errors;
-    },
-    onSubmit: (values: FormValue) => {
-      if (loading) {
-        return;
-      }
-
-      console.log("submit ===", {
-        values,
-        time: timerRef.current.count,
-      });
-      router.push(`/quizzes/${slug}/result`);
-    },
-    onValidationError() {
-      alert(
-        "未入力の回答があります。全て選択を終えてから回答完了ボタンを押してください。",
-      );
-    },
-  });
-
   useEffect(() => {
     const init = async () => {
-      const res = await fetchQuiz(slug);
-      setData(res);
-
-      res.questions.forEach((question, index) => {
-        form.setValues((prev) => ({
-          ...prev,
-          responses: {
-            ...prev.responses,
-            [question.id]: undefined,
-          },
-        }));
-      });
+      await Promise.all([
+        (async function () {
+          const res = await fetchQuiz(slug);
+          setData(res);
+        })(),
+        (async function () {
+          const res = await fetchResult(slug);
+          setResult(res);
+        })(),
+      ]);
     };
 
     try {
@@ -88,15 +44,10 @@ export default function Page({ params }: { params: { slug: string } }) {
       setLoading(false);
     }
 
-    const t = timerRef.current;
-    t.start((time) => {}, 1000);
-
-    return () => {
-      t.stop();
-    };
+    return () => {};
   }, []);
 
-  if (!data || loading) {
+  if (!data || !result || loading) {
     return (
       <div className={styles.container}>
         <div className={styles.skelton}>
@@ -118,8 +69,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       </div>
       <div className={styles.heading}>
         <div className={styles.header}>
-          <h2 className={styles.title}>{data.title}</h2>
-          <div className={styles.count}>全 {data.total || "0"} 問</div>
+          <h2 className={styles.title}>[ 結果 ]{data.title}</h2>
           <div className={styles.meta}>
             <ul className={styles.infoList}>
               <li className={styles.row}>
@@ -133,44 +83,41 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
               </li>
               <li className={styles.row}>
-                <div className={styles.label}>所要時間:</div>
-                <div className={styles.value}> {data.displayDuration}</div>
+                <div className={styles.label}>設問数 :</div>
+                <div className={styles.value}>{data.total || "0"} 問</div>
               </li>
             </ul>
           </div>
         </div>
-        <div className={styles.body}>
-          <p className={styles.intro}>
-            全ての回答が終わったらページ下部の回答完了ボタンをしてテストを完了させてください。
-          </p>
-        </div>
+        <div className={styles.body}></div>
       </div>
+      <Pass data={result} />
       <div className={styles.content}>
         <Blocks
-          data={data.blocks}
-          responses={form.values.responses}
-          errors={form.errors}
+          data={data.questions}
+          result={result}
           onSelect={(e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = e.target;
-
-            form.setValues((prev) => ({
-              ...prev,
-              responses: {
-                ...prev.responses,
-                [name]: parseInt(value),
-              },
-            }));
           }}
         />
       </div>
       <div className={styles.divider}></div>
       <div className={styles.footer}>
-        <div className={styles.message}>
-          回答お疲れ様でした。最後に回答を見直して完了ボタンを押してください。
+        <div className={styles.note}>
+          <p className={styles.noteDescription}>
+            Note
+            (気づいた点や理解があやふやな点など復習する際のメモを残しましょう）
+          </p>
+          <textarea className={styles.noteInput} />
         </div>
         <div className={styles.submit}>
-          <Button variant="primary" onClick={form.submit}>
-            回答完了
+          <Button
+            variant="primary"
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            テスト終了
           </Button>
         </div>
       </div>

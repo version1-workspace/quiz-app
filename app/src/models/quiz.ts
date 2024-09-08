@@ -4,6 +4,7 @@ import { Block, BlockParams, factory as blocksFactory } from "./blocks";
 import { Tag, TagParams, factory as tagFactory } from "./tag";
 import { truncate } from "@/lib/string";
 import { Question } from "./blocks/question";
+import { Result } from "./result";
 
 export type QuizStatus = "active" | "archived" | "draft";
 
@@ -22,6 +23,7 @@ export type QuizParams = {
   progressionRate: number;
   status: QuizStatus;
   blocks: BlockParams[];
+  results: Result[];
   tags: TagParams[];
   createdAt: AppDate;
   updatedAt: AppDate;
