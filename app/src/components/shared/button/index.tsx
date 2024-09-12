@@ -24,10 +24,11 @@ export default function Button({
   children,
 }: Props) {
   const variantStyle = styles[variant || "default"];
+  const _className = className || "";
 
   return (
     <button
-      className={join(styles.container, variantStyle, className)}
+      className={join(styles.container, variantStyle, _className)}
       onClick={onClick}
     >
       {children}

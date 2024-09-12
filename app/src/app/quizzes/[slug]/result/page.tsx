@@ -16,9 +16,11 @@ import Skeleton from "@/components/shared/skeleton";
 import AppDate from "@/models/date";
 import { useForm } from "@/lib/form";
 import Timer from "@/lib/timer";
+import Textarea from "@/components/shared/textarea";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const router = useRouter();
+  const [note, setNote] = useState("");
   const [data, setData] = useState<Quiz>();
   const [result, setResult] = useState<Result>();
   const [loading, setLoading] = useState(true);
@@ -108,7 +110,28 @@ export default function Page({ params }: { params: { slug: string } }) {
             Note
             (気づいた点や理解があやふやな点など復習する際のメモを残しましょう）
           </p>
-          <textarea className={styles.noteInput} />
+          <div className={styles.noteTextarea}>
+            <Textarea
+              row={10}
+              value={note}
+              onChange={(value: string) => {
+                setNote(value);
+              }}
+            />
+          </div>
+          <div className={styles.noteFooter}>
+            <div className={styles.noteActions}>
+              <Button
+                className={styles.saveNoteButton}
+                variant="primary"
+                onClick={() => {
+                  console.log("save note", note);
+                }}
+              >
+                保存
+              </Button>
+            </div>
+          </div>
         </div>
         <div className={styles.submit}>
           <Button
