@@ -6,17 +6,25 @@ import { Quiz } from "@/models/quiz";
 import { fetchQuiz } from "@/services/api/quiz";
 import styles from "./page.module.css";
 import Button from "@/components/shared/button";
-import Breadcrumbs from "@/components/shared/breadcrumbs";
+import { BreadcrumbsWithContext as Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { useBreadcrumbs } from "@/components/shared/breadcrumbs/context";
 import Results from "@/components/quiz/results";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<Quiz>();
   const { slug } = params;
+  const { setWithDefault } = useBreadcrumbs();
 
   useEffect(() => {
     const init = async () => {
       const res = await fetchQuiz(slug);
       setData(res);
+      setWithDefault([
+        {
+          label: res.title,
+          to: `/quizzes/${slug}`,
+        },
+      ]);
     };
 
     init();
@@ -29,12 +37,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div className={styles.container}>
       <div className={styles.breadcrumbs}>
-        <Breadcrumbs
-          data={[
-            { label: "JavaScript", to: "/quizzes/tags/javascript" },
-            { label: data.title, to: `/quizzes/${data.slug}` },
-          ]}
-        />
+        <Breadcrumbs />
       </div>
       <div className={styles.content}>
         <div className={styles.header}>

@@ -4,6 +4,7 @@ import "./globals.css";
 import styles from "./layout.module.css";
 import Header from "@/components/shared/layout/header";
 import { join } from "@/lib/className";
+import { BreadcrumbsContainer } from "@/components/shared/breadcrumbs/context";
 
 const inter = Inter({ subsets: ["latin"] });
 

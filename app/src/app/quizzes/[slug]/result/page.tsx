@@ -8,7 +8,8 @@ import { fetchQuiz } from "@/services/api/quiz";
 import { fetchResult } from "@/services/api/result";
 import styles from "./page.module.css";
 import Button from "@/components/shared/button";
-import Breadcrumbs from "@/components/shared/breadcrumbs";
+import { BreadcrumbsWithContext as Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { useBreadcrumbs } from "@/components/shared/breadcrumbs/context";
 import Results from "@/components/quiz/results";
 import Blocks from "@/components/quiz/blocks";
 import { Pass } from "@/components/result/message";
@@ -24,6 +25,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<Quiz>();
   const [result, setResult] = useState<Result>();
   const [loading, setLoading] = useState(true);
+  const { setWithDefault } = useBreadcrumbs();
   const { slug } = params;
 
   useEffect(() => {
@@ -32,6 +34,12 @@ export default function Page({ params }: { params: { slug: string } }) {
         (async function () {
           const res = await fetchQuiz(slug);
           setData(res);
+          setWithDefault([
+            {
+              label: `${res.title} - 結果`,
+              to: `/quizzes/${slug}`,
+            },
+          ]);
         })(),
         (async function () {
           const res = await fetchResult(slug);
@@ -62,12 +70,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div className={styles.container}>
       <div className={styles.breadcrumbs}>
-        <Breadcrumbs
-          data={[
-            { label: "JavaScript", to: "/quizzes/tags/javascript" },
-            { label: data.title, to: `/quizzes/${data.slug}` },
-          ]}
-        />
+        <Breadcrumbs />
       </div>
       <div className={styles.heading}>
         <div className={styles.header}>

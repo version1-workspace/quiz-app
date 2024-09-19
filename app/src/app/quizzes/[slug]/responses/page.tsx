@@ -6,7 +6,8 @@ import { Quiz } from "@/models/quiz";
 import { fetchQuiz } from "@/services/api/quiz";
 import styles from "./page.module.css";
 import Button from "@/components/shared/button";
-import Breadcrumbs from "@/components/shared/breadcrumbs";
+import { BreadcrumbsWithContext as Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { useBreadcrumbs } from "@/components/shared/breadcrumbs/context";
 import Results from "@/components/quiz/results";
 import Blocks from "@/components/quiz/blocks";
 import Skeleton from "@/components/shared/skeleton";
@@ -27,6 +28,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const timerRef = useRef<Timer>(new Timer());
   const [data, setData] = useState<Quiz>();
   const [loading, setLoading] = useState(true);
+  const { setWithDefault } = useBreadcrumbs();
   const { slug } = params;
 
   const form = useForm<FormValue, FormErrors>({
@@ -53,10 +55,6 @@ export default function Page({ params }: { params: { slug: string } }) {
         return;
       }
 
-      console.log("submit ===", {
-        values,
-        time: timerRef.current.count,
-      });
       router.push(`/quizzes/${slug}/result`);
     },
     onValidationError() {
@@ -70,6 +68,12 @@ export default function Page({ params }: { params: { slug: string } }) {
     const init = async () => {
       const res = await fetchQuiz(slug);
       setData(res);
+      setWithDefault([
+        {
+          label: `${res.title} - 回答`,
+          to: `/quizzes/${slug}`,
+        },
+      ]);
 
       res.questions.forEach((question, index) => {
         form.setValues((prev) => ({
@@ -109,12 +113,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div className={styles.container}>
       <div className={styles.breadcrumbs}>
-        <Breadcrumbs
-          data={[
-            { label: "JavaScript", to: "/quizzes/tags/javascript" },
-            { label: data.title, to: `/quizzes/${data.slug}` },
-          ]}
-        />
+        <Breadcrumbs />
       </div>
       <div className={styles.heading}>
         <div className={styles.header}>
