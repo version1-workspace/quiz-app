@@ -7,7 +7,9 @@ import {
   IoCheckmarkCircle,
   IoAlarmOutline,
   IoCalendarNumberOutline,
-  IoLayers
+  IoLayers,
+  IoAlertCircleOutline,
+  IoInformationCircleOutline
 } from "react-icons/io5";
 
 const icons = {
@@ -20,6 +22,9 @@ const icons = {
   person: IoPerson,
   notification: IoNotificationsSharp,
   check: IoCheckmarkCircle,
+  info: IoInformationCircleOutline,
+  error: IoAlertCircleOutline,
+  warning: IoAlertCircleOutline,
 };
 
 type IconNames = keyof typeof icons;

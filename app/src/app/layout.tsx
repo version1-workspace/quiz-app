@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import styles from "./layout.module.css";
 import Header from "@/components/shared/layout/header";
+import { ToastContainer, show } from "@/lib/toast";
 import { join } from "@/lib/className";
 import { BreadcrumbsContainer } from "@/components/shared/breadcrumbs/context";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={join(styles.body, inter.className)}>
+        <ToastContainer padding={{ top: 60 }} />
         <Header />
         {children}
       </body>
